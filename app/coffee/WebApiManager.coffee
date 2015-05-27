@@ -3,7 +3,7 @@ settings = require "settings-sharelatex"
 logger = require "logger-sharelatex"
 
 module.exports = WebApiManager =
-	joinProject: (project_id, user_id, callback = (error, project, privilegeLevel) ->) ->
+	joinProject: (sandstorm_permissions, project_id, user_id, callback = (error, project, privilegeLevel) ->) ->
 		logger.log {project_id, user_id}, "sending join project request to web"
 		url = "#{settings.apis.web.url}/project/#{project_id}/join"
 		request.post {
@@ -15,6 +15,7 @@ module.exports = WebApiManager =
 				sendImmediately: true
 			json: true
 			jar: false
+			headers: {'x-sandstorm-permissions': sandstorm_permissions}
 		}, (error, response, data) ->
 			return callback(error) if error?
 			if 200 <= response.statusCode < 300
