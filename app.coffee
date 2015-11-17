@@ -28,7 +28,7 @@ setup = (server) ->
 
 	io.configure ->
 		io.enable('browser client minification')
-		io.enable('browser client etag')
+		#io.enable('browser client etag')
 
 		# Fix for Safari 5 error of "Error during WebSocket handshake: location mismatch"
 		# See http://answers.dotcloud.com/question/578/problem-with-websocket-over-ssl-in-safari-with
